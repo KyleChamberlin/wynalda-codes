@@ -22,7 +22,6 @@ Func writeCodesToInkjetFile($inputFile, $inkjetFile, $firstCode, $lastCode, $bre
 	local $codes = FileReadToArray($inputFile)
 	dim $fileArray[ ($lastCode * 2) + 1 ]
 	For $counter = 0 to $lastCode - $firstCode Step 1
-		ConsoleWrite( ($counter + $firstCode) & @CRLF)
 		$fileArray[ 2 * $counter ] = $codes[ $counter + $firstCode - 1 ]
 		if (mod( $counter + 1, $breakpoint ) = 0 AND $counter <> 0) then
 			$fileArray[ (2 * $counter + 1) ] = "********"
@@ -45,9 +44,7 @@ Func promptForValue( $prompt, $default, $max, $reprompt, $validationFunction = "
 			Exit
 		EndIf
 		$prompt = $reprompt
-		$isValid = Call($validationFunction, $value, $max)
-	Until $isValid = $validationValue
-
+	Until Call($validationFunction, $value, $max) = $validationValue
 	return $value
 EndFunc
 
