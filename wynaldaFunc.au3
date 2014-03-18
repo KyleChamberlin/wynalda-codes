@@ -1,5 +1,6 @@
-#include "file.au3"
+#include "string.au3"
 #include "Array.au3"
+#include "File.au3"
 
 Func getFileNameWithExtension($file)
 	dim $drive, $dir, $filename, $ext
@@ -11,7 +12,6 @@ Func isValidValue($value, $limit)
 	if ( $limit = "" ) Then
 		$limit = 99999999999
 	EndIf
-
 	if ( $value < 0 OR $value > $limit ) then
 		return False
 	EndIf
@@ -39,14 +39,35 @@ Func jobNumberExistsIn($JobNumber, $Folder)
 EndFunc
 
 Func promptForValue( $prompt, $default, $max, $reprompt, $validationFunction = "isValidValue", $validationValue = 1)
-		Do
-			$value = InputBox("Wynalda Codes", $prompt, $default)
-			if (@error = 1) then
-				Exit
-			EndIf
-			$prompt = $reprompt
-			$isValid = Call($validationFunction, $value, $max)
-		Until $isValid = $validationValue
+	Do
+		$value = InputBox("Wynalda Codes", $prompt, $default)
+		if (@error = 1) then
+			Exit
+		EndIf
+		$prompt = $reprompt
+		$isValid = Call($validationFunction, $value, $max)
+	Until $isValid = $validationValue
 
-		return $value
+	return $value
 EndFunc
+
+Func QCReport($path, $jobnumber, $originalFile, $totalCodes, $inkjetFile, $inkjetCodes, $spoilageFile, $spoilageCodes, $breakPoint)
+	$reportpath = $path & "\"& $jobnumber & "_QC.txt"
+	$report = FileOpen($reportpath, 10)
+	FileWriteLine($report,$jobnumber & " - Wynalda Codes Inkjet File Info")
+	FileWriteLine($report,"Original Code File: " & $originalFile)
+	FileWriteLine($report,"Original Number of Codes: "& $totalCodes)
+	FileWriteLine($report,"")
+	FileWriteLine($report,"Two line files with breaks every " & $breakcount & " codes:")
+	FileWriteLine($report,"")
+	FileWriteLine($report,"Inkjet File: " & $inkjetFile)
+	FileWriteLine($report,"Contains: " & $inkjetCodes& " codes")
+	FileWriteLine($report,"")
+	FileWriteLine($report,"Spoilage File: " & $spoilageFile)
+	FileWriteLine($report,"Contains: "& $spoilageCodes & " Spoilage codes")
+	FileWriteLine($report,"")
+	FileClose($report)
+
+	return $reportpath
+EndFunc
+
