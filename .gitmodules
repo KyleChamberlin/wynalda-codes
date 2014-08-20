@@ -1,0 +1,3 @@
+[submodule "tests/micro"]
+	path = tests/micro
+	url = git://github.com/AutoItMicro/MicroUnitTestingFramework.git
