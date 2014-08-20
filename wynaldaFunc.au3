@@ -55,7 +55,7 @@ Func QCReport($path, $jobnumber, $originalFile, $totalCodes, $inkjetFile, $inkje
 	FileWriteLine($report,"Original Code File: " & $originalFile)
 	FileWriteLine($report,"Original Number of Codes: "& $totalCodes)
 	FileWriteLine($report,"")
-	FileWriteLine($report,"Two line files with breaks every " & $breakcount & " codes:")
+	FileWriteLine($report,"Two line files with breaks every " & $breakPoint & " codes:")
 	FileWriteLine($report,"")
 	FileWriteLine($report,"Inkjet File: " & $inkjetFile)
 	FileWriteLine($report,"Contains: " & $inkjetCodes& " codes")
