@@ -12,7 +12,7 @@ Func isValidValue($value, $limit)
 	if ( $limit = "" ) Then
 		$limit = 99999999999
 	EndIf
-	if ( $value < 0 OR $value > $limit ) then
+	if ( $value < 5 OR $value > $limit ) then
 		return False
 	EndIf
 	return true
