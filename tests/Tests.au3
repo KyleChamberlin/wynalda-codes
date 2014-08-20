@@ -15,6 +15,10 @@ $breakPoint = 10
 #Region Test Suite
 $testSuite = newTestSuite("Wynalda 1UP Code File Generation Program - Test Suite")
 
+If $CmdLine[0] > 0 Then
+    $testSuite.ci = True
+EndIf
+
 $testSuite.addTest(fileNameExtractedFromFullPathIncludesExtensionAndExcludesPath())
 $testSuite.addTest(isValidValueTest())
 $testSuite.addTest(inkjetFileHasLastCodeMinusFirstCodePlusOneTimesTwoLines())

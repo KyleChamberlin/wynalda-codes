@@ -1,0 +1,29 @@
+version: 2.0.1.{build}
+
+init:
+  - cinst autoit.commandline
+
+install:
+  - git submodule update --init --recursive
+
+build_script:
+  - aut2exe /in wynalda.au3 /out wynalda.exe /console
+
+test_script:
+  - cd tests
+  - autoit3 /ErrorStdOut /AutoIt3ExecuteScript Tests.au3 ci
+  - cd ..
+  
+platform: 
+  - x86
+  - x64
+  
+artifacts:
+  - path: wynalda.exe
+
+notifications:
+  # Slack
+  - provider: Slack
+    auth_token:
+      secure: qeUIECoPdYw1Osprk+JjU5RO9muCtv4pxZBepPt9PaJocrHRj/PEvd8rn/MD/C5G
+    channel: wynalda-codes
