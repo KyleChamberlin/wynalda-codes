@@ -12,6 +12,14 @@ build_script:
 test_script:
   - cd tests
   - autoit3 /ErrorStdOut /AutoIt3ExecuteScript Tests.au3 ci
+  - cd ..
+  
+platform: 
+  - x86
+  - x64
+  
+artifacts:
+  - path: wynalda.exe
 
 notifications:
   # Slack
