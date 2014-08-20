@@ -1,0 +1,14 @@
+version: 2.0.0.{build}
+
+init:
+  - cinst autoit.commandline
+
+install:
+  - git submodule update --init --recusive
+
+build_script:
+  - aut2exe /in wynalda.au3 /out wynalda.exe /console
+
+test_script:
+  - cd tests
+  - autoit3 /ErrorStdOut /AutoIt3ExecuteScript Tests.au3 ci
